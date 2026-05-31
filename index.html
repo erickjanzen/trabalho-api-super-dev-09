@@ -6,6 +6,49 @@
     <title>Barbearia</title>
 </head>
 <body>
+    <h1>Brown Barber</h1>
+    <h3>Reservar horário</h3>
+    <link rel="stylesheet" href="assets/css/index.css">
 
+    <form>
+        <label>Nome do cliente*</label>
+        <input type="text" id="areaNome" placeholder="Digite seu nome" required>  
+        <div>
+            <label>Tipo de serviço*</label>
+            <select id="tipoServico">
+                <option disabled selected>Selecione um serviço</option>
+                <option value="cabelo">Cabelo</option>
+                <option value="barba">Barba</option>
+                <option value="cabeloEBarba">Cabelo e barba</option>
+                <option value="sobrancelha">Sobrancelha</option>
+                <option value="cabeloESobrancelha">Cabelo e sobrancelha</option>
+                <option value="barbaESobrancelha">Barba e sobrancelha</option>
+                <option value="completo">Completo</option>
+            </select>
+        </div>
+        <div>
+            <label>Detalhes do corte</label>
+            <input type="text" id="detalhesCorte" placeholder="Ex: Degradê, navalhado...">
+        </div>
+        <div>
+            <label>Barbeiro*</label>
+            <select id="atendente">
+                <option value="" disabled selected>Selecione um barbeiro</option>
+                <option value="Robinho">Robinho</option>
+                <option value="Cassio">Cassio</option>
+                <option value="Lucas">Lucas</option>
+                <option value="Neymar">Neymar</option>
+            </select>
+        </div>
+        <div>
+            <label>Horário agendado*</label>
+            <input type="number" id="horarioAgendado" placeholder="Ex: 14:30">
+        </div>
+    </form>
+    <p class ="hidden" id="infoServico"></p>
+    <button class="apresentarPedido" id="botaoApresentar">Calcular Pedido</button>
+    <button class="enviarReserva" id="botaoFinal">Enviar Reserva</button>
+
+    <script src="assets/js/index.js"></script>
 </body>
 </html>
