@@ -101,17 +101,19 @@ button {
     padding: 12px 25px;
 
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
 
-    background-color: #2d6cdf;
-    color: white;
+    font-weight: bold;
+
+    background-color: #e0b935;
+    color: rgb(0, 0, 0);
 
     font-size: 16px;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #1f57b8;
+    transform: scale(1.02);
 }
 
 #infoServico {

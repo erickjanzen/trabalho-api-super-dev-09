@@ -38,6 +38,46 @@ body > button {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
+/* Container dos botões CRUD */
+.btn-atualizar,
+.btn-excluir {
+    width: 48%;
+    margin-top: 15px;
+    padding: 12px;
+
+    border: none;
+    border-radius: 8px;
+
+    font-weight: bold;
+    font-size: 15px;
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Atualizar */
+.btn-atualizar {
+    background: #f5c542;
+    color: #000;
+}
+
+.btn-atualizar:hover {
+    background: #e0b935;
+    transform: scale(1.02);
+}
+
+/* Excluir */
+.btn-excluir {
+    background: #c0392b;
+    color: white;
+}
+
+.btn-excluir:hover {
+    background: #a93226;
+    transform: scale(1.02);
+}
+
+
 /* Efeito ao passar o mouse */
 body > button:hover {
     background: #f1c84c;

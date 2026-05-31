@@ -1,11 +1,10 @@
 const botaoEnviar = document.getElementsByClassName('enviarReserva')[0];
 botaoEnviar.addEventListener('click', enviarReservas)
-
+const urlBase = "https://api.franciscosensaulas.com/api/v1/trabalho/atendimentos";
 function enviarReservas(evento){
     const areaNome = document.getElementById("areaNome")
     const tipoServico = document.getElementById("tipoServico")
     const detalhesCorte = document.getElementById("detalhesCorte").value
-    const urlBase = "https://api.franciscosensaulas.com/api/v1/trabalho/atendimentos"
     const atendente = document.getElementById("atendente").value;
     const horarioAgendado = document.getElementById("horarioAgendado").value;
     const horario = parseFloat(horarioAgendado);
@@ -59,12 +58,24 @@ function enviarReservas(evento){
     console.log(JSON.stringify(dados));
 
     fetch(urlBase, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(dados)
-    })
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify(dados)
+})
+.then(response => response.json())
+.then(res => {
+
+    console.log("Resposta da API:", res);
+
+    // SALVA O ID PARA A OUTRA PÁGINA
+    localStorage.setItem("atendimentoId", res.id);
+
+})
+.catch(error => {
+    console.log("Erro ao enviar:", error);
+});
 
     const infoServico = document.getElementById("infoServico");
     infoServico.innerText = `Nome do cliente: ${areaNome.value}
