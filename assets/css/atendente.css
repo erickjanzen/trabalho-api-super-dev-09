@@ -13,6 +13,43 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+/* Botão Voltar */
+body > button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+
+    padding: 10px 20px;
+
+    background: #d4af37;
+    color: #000;
+
+    border: none;
+    border-radius: 8px;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Efeito ao passar o mouse */
+body > button:hover {
+    background: #f1c84c;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Efeito ao clicar */
+body > button:active {
+    transform: translateY(0);
+}
+
 /* Container principal */
 .area-atendente {
     width: 400px;

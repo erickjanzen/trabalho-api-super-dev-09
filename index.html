@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barbearia</title>
+    <link rel="stylesheet" href="assets/css/index.css">
 </head>
+
 <body>
+    <button onclick="window.location.href='hud.html';">
+            Voltar
+        </button>
     <h1>Brown Barber</h1>
     <h3>Reservar horário</h3>
-    <link rel="stylesheet" href="assets/css/index.css">
+
 
     <form>
         <label>Nome do cliente*</label>
-        <input type="text" id="areaNome" placeholder="Digite seu nome" required>  
+        <input type="text" id="areaNome" placeholder="Digite seu nome" required>
         <div>
             <label>Tipo de serviço*</label>
             <select id="tipoServico">
@@ -45,10 +51,11 @@
             <input type="number" id="horarioAgendado" placeholder="Ex: 14:30">
         </div>
     </form>
-    <p class ="hidden" id="infoServico"></p>
+    <p class="hidden" id="infoServico"></p>
     <button class="apresentarPedido" id="botaoApresentar">Calcular Pedido</button>
     <button class="enviarReserva" id="botaoFinal">Enviar Reserva</button>
 
     <script src="assets/js/index.js"></script>
 </body>
+
 </html>
