@@ -96,6 +96,11 @@ select {
     font-size: 14px;
 }
 
+#botaoApagar {
+    background-color: red;
+    color: white;
+}
+
 button {
     margin-top: 20px;
     padding: 12px 25px;
