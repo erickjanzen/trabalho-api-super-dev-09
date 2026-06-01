@@ -131,3 +131,55 @@ function apagarCadastro(){
             alert("Ocorreu um erro ao tentar apagar a reserva");
         })
 }
+
+const botaoEditar = document.getElementById("botaoEditar")
+
+botaoEditar.addEventListener('click', editarReserva)
+
+function editarReserva(){
+
+    const areaNome = document.getElementById("areaNome");
+    const tipoServico = document.getElementById("tipoServico");
+    const detalhesCorte = document.getElementById("detalhesCorte");
+    const atendente = document.getElementById("atendente");
+    const horarioAgendado = document.getElementById("horarioAgendado");
+
+    const nome = areaNome.value.trim();
+
+    const idEditar = localStorage.getItem("atendimentoId");
+
+    const url = `${urlBase}/${idEditar}`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(categoria => {
+            areaNome.value = categoria.cliente;
+            tipoServico.value = categoria.tipoAtendimento;
+            detalhesCorte.value = categoria.descricao;
+            atendente.value = categoria.atendente;
+            horarioAgendado.value = categoria.duracaoMinutos;
+        })
+            .catch(error => {
+            console.error("Erro ao buscar registro para edição: " + error);
+
+            alert("Ocorreu um erro ao tentar buscar o registro");
+        })
+
+            if(nome.length < 2){
+        alert("O nome deve conter pelo menos 2 caracteres.");
+        return;
+    }
+    
+    if(atendente === ""){
+        alert("Selecione um atendente.");
+        return;
+    }
+
+    if(isNaN(horario) || horario <= 0){
+        alert("Selecione um horário para o atendimento.");
+        return;
+    }
+
+    apagarCadastro()
+
+}
