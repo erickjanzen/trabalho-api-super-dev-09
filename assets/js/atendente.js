@@ -4,6 +4,7 @@ const urlBase = "https://api.franciscosensaulas.com/api/v1/trabalho/atendimentos
 // CREATE (FETCH Utilizando o innertext)
 function carregarAtendimento() {
 
+    //Serve para pegar as informações e armazenar no banco de dados do outro html e trazer pra esse as informações
     const id = localStorage.getItem("atendimentoId");
 
     fetch(`https://api.franciscosensaulas.com/api/v1/trabalho/atendimentos/${id}`)
@@ -23,9 +24,11 @@ function carregarAtendimento() {
 
 carregarAtendimento();
 
-
+//O querySelector() serve para encontrar elementos do HTML usando seletores CSS.
+//Ele retorna o primeiro elemento encontrado que corresponde ao seletor.
 document.querySelector(".btn-enviar").addEventListener("click", function () {
 
+    //faz uma busca no HTML para encontrar o radio button selecionado do grupo feedback
     const avaliacao = document.querySelector('input[name="feedback"]:checked');
 
     if (!avaliacao) {
@@ -47,6 +50,7 @@ document.querySelector(".btn-enviar").addEventListener("click", function () {
         },
         body: JSON.stringify(dados)
     })
+        //Esse trecho é responsável por tratar a resposta da API depois que o fetch() termina.    
         .then(async response => {
             const retorno = await response.text();
 
@@ -64,7 +68,7 @@ document.querySelector(".btn-enviar").addEventListener("click", function () {
         });
 
 });
-    //update, to atualizando o atendimento
+//update, to atualizando o atendimento
 function atualizarAtendimento() {
 
     const id = localStorage.getItem("atendimentoId");
@@ -81,7 +85,7 @@ function atualizarAtendimento() {
         alert("Digite uma descrição para atualizar o atendimento.");
         return;
     }
-
+    
     const dados = {
         cliente: document.getElementById("nomeCliente").innerText,
         tipoAtendimento: document.getElementById("produtoCliente").innerText,
@@ -101,24 +105,24 @@ function atualizarAtendimento() {
         },
         body: JSON.stringify(dados)
     })
-    .then(async response => {
+        .then(async response => {
 
-        const retorno = await response.text();
+            const retorno = await response.text();
 
-        console.log("Status:", response.status);
-        console.log("Resposta:", retorno);
+            console.log("Status:", response.status);
+            console.log("Resposta:", retorno);
 
-        if (response.ok) {
-            alert("Atendimento atualizado com sucesso!");
-        } else {
-            alert(`Erro ao atualizar atendimento (${response.status})`);
-        }
+            if (response.ok) {
+                alert("Atendimento atualizado com sucesso!");
+            } else {
+                alert(`Erro ao atualizar atendimento (${response.status})`);
+            }
 
-    })
-    .catch(erro => {
-        console.log("Erro:", erro);
-        alert("Erro de conexão com a API.");
-    });
+        })
+        .catch(erro => {
+            console.log("Erro:", erro);
+            alert("Erro de conexão com a API.");
+        });
 
 }
 
