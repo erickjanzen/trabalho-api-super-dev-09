@@ -34,11 +34,10 @@ document.querySelector(".btn-enviar").addEventListener("click", function () {
     }
 
     const dados = {
-        nome: document.getElementById("nomeCliente").innerText,
-        produto: document.getElementById("produtoCliente").innerText,
-        valor: document.getElementById("valorCliente").innerText,
-        horario: document.getElementById("horarioCliente").innerText,
-        nota: avaliacao.value
+        Cliente: document.getElementById("nomeCliente").innerText,
+        Atendente: "Lucas",
+        Descricao: `Nota ${avaliacao.value}`,
+        TipoAtendimento: document.getElementById("produtoCliente").innerText
     };
     //CREATE (POST)
     fetch("https://api.franciscosensaulas.com/api/v1/trabalho/atendimentos", {
@@ -46,50 +45,79 @@ document.querySelector(".btn-enviar").addEventListener("click", function () {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(dados) 
+        body: JSON.stringify(dados)
     })
-    .then(response => {
-        if (response.ok) {
-            alert("Avaliação enviada com sucesso!");
-        } else {
-            alert("Erro ao enviar avaliação.");
-        }
-    })
-    .catch(erro => {
-        console.log("Erro:", erro);
-    });
+        .then(async response => {
+            const retorno = await response.text();
+
+            console.log("Status:", response.status);
+            console.log("Resposta:", retorno);
+
+            if (response.ok) {
+                alert("Sucesso!");
+            } else {
+                alert(`Erro ${response.status}`);
+            }
+        })
+        .catch(erro => {
+            console.log("Erro:", erro);
+        });
 
 });
-
+    //update, to atualizando o atendimento
 function atualizarAtendimento() {
 
-    const avaliacao = document.querySelector('input[name="feedback"]:checked');
+    const id = localStorage.getItem("atendimentoId");
+
+    if (!id) {
+        alert("Nenhum atendimento encontrado.");
+        return;
+    }
+
+    const descricaoAtualizacao =
+        document.getElementById("descricaoAtualizacao").value;
+
+    if (!descricaoAtualizacao.trim()) {
+        alert("Digite uma descrição para atualizar o atendimento.");
+        return;
+    }
 
     const dados = {
-        nome: document.getElementById("nomeCliente").innerText,
-        produto: document.getElementById("produtoCliente").innerText,
-        valor: document.getElementById("valorCliente").innerText,
-        horario: document.getElementById("horarioCliente").innerText,
-        nota: avaliacao ? avaliacao.value : null
+        cliente: document.getElementById("nomeCliente").innerText,
+        tipoAtendimento: document.getElementById("produtoCliente").innerText,
+        descricao: descricaoAtualizacao,
+        atendente: "Lucas",
+        duracaoMinutos: parseInt(
+            document.getElementById("horarioCliente").innerText.replace(" min", "")
+        )
     };
 
-    //ATUALIZAR (PUT)
-    fetch("https://api.franciscosensaulas.com/api/v1/trabalho/atendimentos", {
+    console.log("Atualizando atendimento:", dados);
+
+    fetch(`https://api.franciscosensaulas.com/api/v1/trabalho/atendimentos/${id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(dados)
     })
-    .then(response => {
+    .then(async response => {
+
+        const retorno = await response.text();
+
+        console.log("Status:", response.status);
+        console.log("Resposta:", retorno);
+
         if (response.ok) {
             alert("Atendimento atualizado com sucesso!");
         } else {
-            alert("Erro ao atualizar atendimento.");
+            alert(`Erro ao atualizar atendimento (${response.status})`);
         }
+
     })
     .catch(erro => {
         console.log("Erro:", erro);
+        alert("Erro de conexão com a API.");
     });
 
 }
@@ -98,19 +126,20 @@ function atualizarAtendimento() {
 
 function excluirAtendimento() {
 
-    // DELETE (DELETE)
-    fetch("https://api.franciscosensaulas.com/api/v1/trabalho/atendimentos", {
+    const id = localStorage.getItem("atendimentoId");
+
+    fetch(`https://api.franciscosensaulas.com/api/v1/trabalho/atendimentos/${id}`, {
         method: "DELETE"
     })
-    .then(response => {
-        if (response.ok) {
-            alert("Atendimento excluído com sucesso!");
-        } else {
-            alert("Erro ao excluir atendimento.");
-        }
-    })
-    .catch(erro => {
-        console.log("Erro:", erro);
-    });
+        .then(response => {
+            if (response.ok) {
+                alert("Atendimento excluído com sucesso!");
+            } else {
+                alert("Erro ao excluir atendimento.");
+            }
+        })
+        .catch(erro => {
+            console.log("Erro:", erro);
+        });
 
 }

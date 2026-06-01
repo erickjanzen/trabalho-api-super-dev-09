@@ -16,7 +16,7 @@ function enviarReservas(evento){
         alert("O nome deve conter pelo menos 2 caracteres.");
         return;
     }
-    debugger
+    
     if(tipoServico.value === "cabelo"){
         valorPedido = 50
     } else if (tipoServico.value === "barba"){
@@ -72,6 +72,9 @@ function enviarReservas(evento){
     // SALVA O ID PARA A OUTRA PÁGINA
     localStorage.setItem("atendimentoId", res.id);
 
+})
+.then(res => {
+    console.log("Resposta da API:", res);
 })
 .catch(error => {
     console.log("Erro ao enviar:", error);
